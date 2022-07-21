@@ -145,9 +145,9 @@ static void uinput_setup(int fd) {
 	usetup.id.vendor = 0x2333;
 	usetup.id.product = 0x6666;
 	usetup.id.version = 1;
-	usetup.absmin[ABS_X] = 0,
+	usetup.absmin[ABS_X] = 0;
 	usetup.absmax[ABS_X] = max_x;
-	usetup.absmin[ABS_Y] = 0,
+	usetup.absmin[ABS_Y] = 0;
 	usetup.absmax[ABS_Y] = max_y;
 
 	write(fd, &usetup, sizeof(usetup));
