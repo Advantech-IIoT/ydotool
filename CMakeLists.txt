@@ -28,4 +28,4 @@ add_executable(ydotool ${SOURCE_FILES_CLIENT})
 install(TARGETS ydotool DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 add_subdirectory(Daemon)
-add_subdirectory(manpage)
+#add_subdirectory(manpage)

@@ -112,12 +112,12 @@ int tool_mousemove(int argc, char **argv) {
 
 	if (i == 2) {
 		if (is_abs) {
-			uinput_emit(EV_REL, REL_X, INT32_MIN, 0);
-			uinput_emit(EV_REL, REL_Y, INT32_MIN, 1);
+			uinput_emit(EV_ABS, ABS_X, arg[0], 0);
+			uinput_emit(EV_ABS, ABS_Y, arg[1], 1);
+		} else {
+			uinput_emit(EV_REL, REL_X, arg[0], 0);
+			uinput_emit(EV_REL, REL_Y, arg[1], 1);
 		}
-
-		uinput_emit(EV_REL, REL_X, arg[0], 0);
-		uinput_emit(EV_REL, REL_Y, arg[1], 1);
 	} else {
 		show_help();
 		return 1;
