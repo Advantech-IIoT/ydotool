@@ -48,6 +48,7 @@
 #include <dirent.h>
 #include <dlfcn.h>
 
+#include <sys/select.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -71,6 +72,7 @@ static int is_exit = 0;
 
 void terminateHandler(int sig)
 {
+	printf ("Receive terminate signal\n");
 	is_exit = 1;
 }
 
@@ -258,11 +260,23 @@ int main(int argc, char **argv) {
 	chmod(opt_socket_path, strtol(opt_socket_perm, NULL, 8));
 
 	struct input_event uev;
+	fd_set rfds;
+	// 1 second timeout
+	struct timeval tv = {1, 0};
+	int ret;
 
 	while (!is_exit) {
-		if (recv(fd_so, &uev, sizeof(uev), 0) == sizeof(uev)) {
-			//printf("===== event type:%ld code:%ld value:%ld \n", uev.type, uev.code, uev.value);
-			write(fd_ui, &uev, sizeof(uev));
+		FD_ZERO(&rfds);
+		FD_SET(fd_so, &rfds);
+
+		ret = select(fd_so+1, &rfds, NULL, NULL, &tv);
+		if (ret > 0) {
+			if (recv(fd_so, &uev, sizeof(uev), 0) == sizeof(uev)) {
+				//printf("===== event type:%ld code:%ld value:%ld \n", uev.type, uev.code, uev.value);
+				write(fd_ui, &uev, sizeof(uev));
+			}
+		} else if (ret == 0){
+			//printf ("=== 1 second select timeout\n");
 		}
 	}
 
