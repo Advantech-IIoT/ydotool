@@ -39,6 +39,8 @@ install:
 	cp build/ydotool $(DESTINATION_PATH)/usr/local/bin
 	cp build/ydotoold $(DESTINATION_PATH)/usr/local/bin
 	cp build/ydotool.service $(DESTINATION_PATH)/lib/systemd/system
+	cd $(DESTINATION_PATH)/etc/systemd/system/multi-user.target.wants
+	ln -s $(DESTINATION_PATH)/lib/systemd/system/ydotool.service ydotool.service
 
 clean:
 	rm -rf build/ydotool*
