@@ -39,6 +39,7 @@ install:
 	cp build/ydotool $(DESTINATION_PATH)/usr/local/bin
 	cp build/ydotoold $(DESTINATION_PATH)/usr/local/bin
 	cp build/ydotool.service $(DESTINATION_PATH)/lib/systemd/system
+	rm -f $(DESTINATION_PATH)/etc/systemd/system/graphical.target.wants/ydotool.service
 	ln -s -r $(DESTINATION_PATH)/lib/systemd/system/ydotool.service $(DESTINATION_PATH)/etc/systemd/system/graphical.target.wants/ydotool.service
 
 clean:
