@@ -69,7 +69,7 @@ static const struct tool_def tool_list[] = {
 	// {"click",     tool_click},
 	{"mousemove", tool_mousemove},
 	// {"type",      tool_type},
-	// {"key",       tool_key},
+	{"key",       tool_key},
 	// {"debug",     tool_debug},
 	// {"bakers",    tool_bakers},
 };
