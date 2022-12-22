@@ -1,0 +1,9 @@
+**/.git
+**/_autogen
+**/_obj
+**/output
+.dockerignore
+.git
+.gitignore
+.vscode
+.qmake.stash

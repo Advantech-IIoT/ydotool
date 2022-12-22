@@ -1,4 +1,4 @@
-FROM advantechiiot/imx-yocto-sdk:latest
+FROM advantechiiot/imx-yocto-sdk:hardknott
 
 COPY . /src/
 WORKDIR /src
