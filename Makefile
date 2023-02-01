@@ -2,31 +2,16 @@ all: build
 
 YOCTO_VERSION=hardknott
 
-# windows get current path
-ifeq ($(OS),Windows_NT)
-  SHELL=cmd
-  SRC_PATH=$(shell echo %cd%)
-  OUTPUT_PATH=$(shell echo %cd%)\build
-  ifeq ($(YOCTO_VERSION),hardknott)
-    DOCKERFILE=.\res\qt_hardknott.Dockerfile
-  else
-    DOCKERFILE=.\res\qt.Dockerfile
-  endif
-else
-  SRC_PATH=$(CURDIR)
-  OUTPUT_PATH=$(CURDIR)/build
-  ifeq ($(YOCTO_VERSION),hardknott)
-    DOCKERFILE=./res/qt_hardknott.Dockerfile
-  else
-    DOCKERFILE=./res/qt.Dockerfile
-  endif
-  DESTINATION_PATH=$(SRC_PATH)
-endif
+SRC_PATH=$(CURDIR)
+OUTPUT_PATH=$(CURDIR)/build
+DESTINATION_PATH=$(SRC_PATH)
 
 ifeq ($(YOCTO_VERSION),hardknott)
+  DOCKERFILE=./res/hardknott_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-hardknott
 else
-  DOCKER_TAG_NAME=advantech/qt-builder
+  DOCKERFILE=./res/kirkstone_qt_builder.Dockerfile
+  DOCKER_TAG_NAME=advantech/qt-builder-kirkstone
 endif
 
 build-image:
