@@ -264,14 +264,17 @@ int main(int argc, char **argv) {
 
 	struct input_event uev;
 	fd_set rfds;
-	// 1 second timeout
-	struct timeval tv = {1, 0};
+	// 2 second timeout
+	struct timeval tv = {2, 0};
 	int ret;
 
 	while (!is_exit) {
 		FD_ZERO(&rfds);
 		FD_SET(fd_so, &rfds);
 
+		// reset timeout prevent select function modify it
+		tv.tv_sec = 2;
+		tv.tv_usec = 0;
 		ret = select(fd_so+1, &rfds, NULL, NULL, &tv);
 		if (ret > 0) {
 			if (recv(fd_so, &uev, sizeof(uev), 0) == sizeof(uev)) {
