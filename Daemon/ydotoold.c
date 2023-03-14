@@ -62,8 +62,8 @@
 
 #define BUFSIZE 256
 
-const char* GET_RESOLUTION_WIDTH_CMD = "wayland-info | grep logical_width | awk -F ' ' '{print $2}' | tr -d ','";
-const char* GET_RESOLUTION_HEIGHT_CMD = "wayland-info | grep logical_height | awk -F ' ' '{print $4}' | tr -d ','";
+const char* GET_RESOLUTION_WIDTH_CMD = "cat /sys/class/drm/card*-*/modes | awk -F 'x' '{print $2}'";
+const char* GET_RESOLUTION_HEIGHT_CMD = "cat /sys/class/drm/card*-*/modes | awk -F 'x' '{print $1}'";
 
 static const char *opt_socket_path = "/tmp/.ydotool_socket";
 static const char *opt_socket_perm = "0600";
