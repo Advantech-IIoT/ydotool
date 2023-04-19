@@ -1,14 +1,10 @@
 [Unit]
 Description=Starts ydotoold service
 
-# Make sure we are started after weston service.
-Requires=weston.service
-After=weston.service
-
 [Service]
 Type=simple
 Restart=always
-ExecStart=/bin/bash -c 'source /etc/profile; /usr/local/bin/ydotoold'
+ExecStart=/usr/local/bin/ydotoold
 ExecReload=/usr/bin/kill -HUP $MAINPID
 KillMode=process
 TimeoutSec=15
