@@ -3,3 +3,4 @@ configure_file(
     "${PROJECT_BINARY_DIR}/ydotool.service"
     @ONLY)
 install(FILES "${PROJECT_BINARY_DIR}/ydotool.service" DESTINATION ${SD_UNITDIR})
+install(FILES "${PROJECT_BINARY_DIR}/70-ydotool.rules" DESTINATION ${SD_UNITDIR})

@@ -40,6 +40,7 @@
 #include <assert.h>
 #include <time.h>
 #include <signal.h>
+#include <grp.h>
 
 #include <getopt.h>
 
@@ -64,6 +65,7 @@
 
 const char* GET_RESOLUTION_WIDTH_CMD = "cat /sys/class/drm/card*-*/modes | awk -F 'x' '{print $2}'";
 const char* GET_RESOLUTION_HEIGHT_CMD = "cat /sys/class/drm/card*-*/modes | awk -F 'x' '{print $1}'";
+const char* INPUT_GROUP_NAME = "input";
 
 static const char *opt_socket_path = "/tmp/.ydotool_socket";
 static const char *opt_socket_perm = "0600";
@@ -261,6 +263,16 @@ int main(int argc, char **argv) {
 	}
 
 	chmod(opt_socket_path, strtol(opt_socket_perm, NULL, 8));
+
+	struct group *grp;
+	if ((grp = getgrnam(INPUT_GROUP_NAME)) == NULL) {
+		perror("failed to get group");
+		abort();
+	}
+	if (chown(opt_socket_path, -1, grp->gr_gid) == -1) {
+		perror("failed to chown");
+		abort();
+	}
 
 	struct input_event uev;
 	fd_set rfds;

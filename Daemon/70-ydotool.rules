@@ -1,0 +1,2 @@
+# Create symlinks for ydotool device
+SUBSYSTEM=="input" KERNEL=="event*" ATTRS{name}=="*virtual device*",     SYMLINK+="input/virtualdev0"
