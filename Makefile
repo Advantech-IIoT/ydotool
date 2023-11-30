@@ -5,6 +5,7 @@ YOCTO_VERSION=hardknott
 SRC_PATH=$(CURDIR)
 OUTPUT_PATH=$(CURDIR)/build
 DESTINATION_PATH=$(SRC_PATH)
+VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)
 
 ifeq ($(YOCTO_VERSION),hardknott)
   DOCKERFILE=./res/hardknott_qt_builder.Dockerfile
@@ -47,3 +48,17 @@ clean:
 
 clean-all:
 	rm -rf build/*
+
+clean-cmakefiles:
+	rm -rf build/CMakeFiles
+	rm -rf build/Daemon
+	rm -rf build/cmake_install.cmake
+	rm -rf build/CMakeCache.txt
+	rm -rf build/Makefile
+
+create-sbom: clean-sbom clean-cmakefiles
+	cd build && sbom-tool generate -b . -bc . -pn ydotool -pv $(VERSION) -ps Advantech -nsb "https://github.com/Advantech-IIoT"
+	cp build/_manifest/spdx_2.2/manifest.spdx.json $(DESTINATION_PATH)/../../scripts/out/sbom/ydotool.manifest.spdx.json
+
+clean-sbom:
+	rm -rf build/_manifest
