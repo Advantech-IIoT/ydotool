@@ -42,6 +42,8 @@ install:
 	cp build/70-ydotool.rules $(DESTINATION_PATH)/etc/udev/rules.d
 	rm -f $(DESTINATION_PATH)/etc/systemd/system/graphical.target.wants/ydotool.service
 	ln -s -r $(DESTINATION_PATH)/lib/systemd/system/ydotool.service $(DESTINATION_PATH)/etc/systemd/system/graphical.target.wants/ydotool.service
+	mkdir -p $(DESTINATION_PATH)/usr/share/common-licenses/ydotool
+	cp ${CURRENT_PATH}/LICENSE $(DESTINATION_PATH)/usr/share/common-licenses/ydotool
 
 clean:
 	rm -rf build/ydotool*
