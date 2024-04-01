@@ -1,3 +1,5 @@
+// Copyright (C) 2023 The Advantech Company Ltd.
+// SPDX-License-Identifier: GPL-3.0-or-later
 /*
     This file is part of ydotool.
     Copyright (C) 2018-2022 Reimu NotMoe <reimu@sudomaker.com>

@@ -44,6 +44,7 @@ install:
 	ln -s -r $(DESTINATION_PATH)/lib/systemd/system/ydotool.service $(DESTINATION_PATH)/etc/systemd/system/graphical.target.wants/ydotool.service
 	mkdir -p $(DESTINATION_PATH)/usr/share/common-licenses/ydotool
 	cp $(SRC_PATH)/LICENSE $(DESTINATION_PATH)/usr/share/common-licenses/ydotool
+	cp $(SRC_PATH)/STATEMENT.txt $(DESTINATION_PATH)/usr/share/common-licenses/ydotool
 
 clean:
 	rm -rf build/ydotool*
