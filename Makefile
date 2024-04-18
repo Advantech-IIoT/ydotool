@@ -10,9 +10,12 @@ VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)
 ifeq ($(YOCTO_VERSION),hardknott)
   DOCKERFILE=./res/hardknott_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-hardknott
-else
+else ifeq ($(YOCTO_VERSION),kirkstone)
   DOCKERFILE=./res/kirkstone_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-kirkstone
+else
+  DOCKERFILE=./res/mickledore_qt_builder.Dockerfile
+  DOCKER_TAG_NAME=advantech/qt-builder-mickledore
 endif
 
 build-image:
