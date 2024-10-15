@@ -1,6 +1,6 @@
 all: build
 
-YOCTO_VERSION=hardknott
+YOCTO_VERSION=mickledore
 
 SRC_PATH=$(CURDIR)
 OUTPUT_PATH=$(CURDIR)/build
