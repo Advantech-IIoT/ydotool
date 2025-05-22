@@ -13,9 +13,12 @@ ifeq ($(YOCTO_VERSION),hardknott)
 else ifeq ($(YOCTO_VERSION),kirkstone)
   DOCKERFILE=./res/kirkstone_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-kirkstone
-else
+else ifeq ($(YOCTO_VERSION),mickledore)
   DOCKERFILE=./res/mickledore_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-mickledore
+else
+  DOCKERFILE=./res/scarthgap_qt_builder.Dockerfile
+  DOCKER_TAG_NAME=advantech/qt-builder-scarthgap
 endif
 
 build-image:
