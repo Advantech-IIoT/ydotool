@@ -1,5 +1,6 @@
 all: build
 
+PLATFORM=imx
 YOCTO_VERSION=mickledore
 
 SRC_PATH=$(CURDIR)
@@ -7,6 +8,7 @@ OUTPUT_PATH=$(CURDIR)/build
 DESTINATION_PATH=$(SRC_PATH)
 VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)
 
+ifeq ($(PLATFORM),imx)
 ifeq ($(YOCTO_VERSION),hardknott)
   DOCKERFILE=./res/hardknott_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-hardknott
@@ -19,6 +21,10 @@ else ifeq ($(YOCTO_VERSION),mickledore)
 else
   DOCKERFILE=./res/scarthgap_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-scarthgap
+endif
+else ifeq ($(PLATFORM),qcom)
+DOCKERFILE=./res/qcom_1.7_builder.Dockerfile
+DOCKER_TAG_NAME=advantech/qcom-builder-qli_1.7
 endif
 
 build-image:
