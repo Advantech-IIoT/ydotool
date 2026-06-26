@@ -23,8 +23,8 @@ else
   DOCKER_TAG_NAME=advantech/qt-builder-scarthgap
 endif
 else ifeq ($(PLATFORM),qcom)
-DOCKERFILE=./res/qcom_1.7_builder.Dockerfile
-DOCKER_TAG_NAME=advantech/qcom-builder-qli_1.7
+DOCKERFILE=./res/qcom_1.8_builder.Dockerfile
+DOCKER_TAG_NAME=advantech/qcom-builder-qli_1.8
 endif
 
 build-image:
