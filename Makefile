@@ -1,7 +1,7 @@
 all: build
 
 PLATFORM=imx
-YOCTO_VERSION=mickledore
+YOCTO_VERSION=wrynose
 
 SRC_PATH=$(CURDIR)
 OUTPUT_PATH=$(CURDIR)/build
@@ -18,9 +18,12 @@ else ifeq ($(YOCTO_VERSION),kirkstone)
 else ifeq ($(YOCTO_VERSION),mickledore)
   DOCKERFILE=./res/mickledore_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-mickledore
-else
+else ifeq ($(YOCTO_VERSION),scarthgap)
   DOCKERFILE=./res/scarthgap_qt_builder.Dockerfile
   DOCKER_TAG_NAME=advantech/qt-builder-scarthgap
+else
+  DOCKERFILE=./res/wrynose_qt_builder.Dockerfile
+  DOCKER_TAG_NAME=advantech/qt-builder-wrynose
 endif
 else ifeq ($(PLATFORM),qcom)
 DOCKERFILE=./res/qcom_1.8_builder.Dockerfile
